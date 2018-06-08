@@ -1,0 +1,84 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="intereses.list_usuarios_form">
+      <field name="name">intereses.usuario.form</field>
+      <field name="model">intereses.usuario</field>
+      <field name="arch" type="xml">
+        <form string="Listado de Usuarios">
+          <sheet>
+            <div class="oe_title">
+              <label for="name" class="oe_edit_only" string="Nombre">Nombre</label>
+              <h1>
+                <field name="name"/>
+              </h1>
+            </div>
+            <separator string="Datos Personales" colspan="2" />
+            <group colspan="2" col="2">
+              <field name="fecha_nacimiento"/>
+              <field name="pais_id"/>
+            </group>
+            <field name="aficion_ids"/>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="intereses.list_usuarios_tree">
+      <field name="name">intereses.usuario.tree</field>
+      <field name="model">intereses.usuario</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="fecha_nacimiento"/>
+          <field name="pais_id"/>
+          <field name="aficion_ids">
+            <tree string="Aficiones del usuario">
+              <field name="usuario_id"/>
+            </tree>
+          </field>
+        </tree>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="intereses.action_window">
+      <field name="name">Ventana de Usuarios</field>
+      <field name="res_model">intereses.usuario</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="intereses.action_server">
+      <field name="name">intereses server</field>
+      <field name="model_id" ref="model_intereses_intereses"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+
+    <menuitem name="intereses" id="intereses.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Usuarios" id="intereses.usuarios" parent="intereses.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Listado" id="intereses.usuarios_list" parent="intereses.usuarios"
+              action="intereses.action_window"/>
+
+  </data>
+</odoo>

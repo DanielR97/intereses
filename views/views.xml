@@ -1,0 +1,67 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="intereses.list_usuario">
+      <field name="name">Listado de Usuarios</field>
+      <field name="model">intereses.usuario</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="fecha_nacimiento"/>
+          <field name="pais_id"/>
+          <field name="foto_usuario" widget="image" width="100px" height="100px"/>
+          <field name="aficion_id"/>
+        </tree>
+      </field>
+    </record>
+
+
+
+    <record model="ir.ui.view" id="intereses.list_aficion">
+      <field name="name">Aficiones</field>
+      <field name="model">intereses.aficion</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="aficionados"/>
+          <field name="foto_aficion" widget="image" width="100px" height="100px"/>
+          <field name="usuario_id"/>
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models  -->
+
+    <record model="ir.actions.act_window" id="intereses.action_window_usuario">
+      <field name="name">Ventana de los Usuarios</field>
+      <field name="res_model">intereses.usuario</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="intereses.action_window_aficion">
+      <field name="name">Ventana de las Aficiones</field>
+      <field name="res_model">intereses.aficion</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Top menu item -->
+
+    <menuitem name="Intereses" id="intereses.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Usuarios y Aficiones" id="intereses.menu_usuario" parent="intereses.menu_root"/>
+
+    <!-- actions -->
+
+    <menuitem name="Lista de Usuarios" id="intereses.menu_listado_usuario" parent="intereses.menu_usuario"
+              action="intereses.action_window_usuario"/>
+
+    <menuitem name="Lista de Aficiones" id="intereses.menu_listado_aficion" parent="intereses.menu_usuario"
+              action="intereses.action_window_aficion"/>
+
+
+  </data>
+</odoo>
