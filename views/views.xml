@@ -2,48 +2,64 @@
   <data>
     <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="intereses.list_usuario">
-      <field name="name">Listado de Usuarios</field>
-      <field name="model">intereses.usuario</field>
+    <record model="ir.ui.view" id="intereses.list_aficionado">
+      <field name="name">Listado de Aficionados</field>
+      <field name="model">intereses.aficionado</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
           <field name="fecha_nacimiento"/>
           <field name="pais_id"/>
-          <field name="foto_usuario" widget="image" width="100px" height="100px"/>
+          <field name="foto_aficionado" widget="image" width="50px" height="50px"/>
           <field name="aficion_id"/>
         </tree>
       </field>
     </record>
 
-
-
     <record model="ir.ui.view" id="intereses.list_aficion">
-      <field name="name">Aficiones</field>
+      <field name="name">Listado de Aficiones</field>
       <field name="model">intereses.aficion</field>
       <field name="arch" type="xml">
-        <tree>
+        <graph string="Aficionados">
+          <field name="name" type="row"/>
+          <field name="aficionados" type="col"/>
+        </graph>
+      </field>
+    </record>
+    
+    <record model="ir.ui.view" id="intereses.list_reunion">
+      <field name="name">Listado de Reuniones</field>
+      <field name="model">intereses.reunion</field>
+      <field name="arch" type="xml">
+        <calendar color="name" date_start="fecha_reunion" string="Reuniones">
           <field name="name"/>
-          <field name="aficionados"/>
-          <field name="foto_aficion" widget="image" width="100px" height="100px"/>
-          <field name="usuario_id"/>
-        </tree>
+          <field name="fecha_reunion"/>
+          <field name="lugar_reunion"/>
+          <field name="puntos"/>
+        </calendar>
       </field>
     </record>
 
 
     <!-- actions opening views on models  -->
 
-    <record model="ir.actions.act_window" id="intereses.action_window_usuario">
-      <field name="name">Ventana de los Usuarios</field>
-      <field name="res_model">intereses.usuario</field>
+    <record model="ir.actions.act_window" id="intereses.action_window_aficionado">
+      <field name="name">Ventana de los Aficionados</field>
+      <field name="res_model">intereses.aficionado</field>
       <field name="view_mode">tree,form</field>
     </record>
 
     <record model="ir.actions.act_window" id="intereses.action_window_aficion">
       <field name="name">Ventana de las Aficiones</field>
       <field name="res_model">intereses.aficion</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,graph,pivot</field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="intereses.action_window_reunion">
+      <field name="name">Calendario de Reuniones</field>
+      <field name="res_model">intereses.reunion</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">tree,form,calendar</field>
     </record>
 
     <!-- Top menu item -->
@@ -52,15 +68,18 @@
 
     <!-- menu categories -->
 
-    <menuitem name="Usuarios y Aficiones" id="intereses.menu_usuario" parent="intereses.menu_root"/>
+    <menuitem name="Aficionados y Aficiones" id="intereses.menu_aficionado" parent="intereses.menu_root"/>
 
     <!-- actions -->
 
-    <menuitem name="Lista de Usuarios" id="intereses.menu_listado_usuario" parent="intereses.menu_usuario"
-              action="intereses.action_window_usuario"/>
+    <menuitem name="Lista de Aficionados" id="intereses.menu_listado_aficionado" parent="intereses.menu_aficionado"
+              action="intereses.action_window_aficionado"/>
 
-    <menuitem name="Lista de Aficiones" id="intereses.menu_listado_aficion" parent="intereses.menu_usuario"
+    <menuitem name="Lista de Aficiones" id="intereses.menu_listado_aficion" parent="intereses.menu_aficionado"
               action="intereses.action_window_aficion"/>
+    
+    <menuitem name="Lista de Reuniones" id="intereses.menu_listado_reunion" parent="intereses.menu_aficionado"
+              action="intereses.action_window_reunion"/>
 
 
   </data>

@@ -10,12 +10,12 @@
         ya sean simples usuarios del módulo o posibles compradores de un producto""",
 
     'author': "Daniel Ramos Fuentes",
-    'website': "https://github.com/DanielR97",
+    'website': "https://github.com/DanielR97/intereses",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
     # for the full list
-    'category': 'Uncategorized',
+    'category': 'Entretenimiento',
     'version': '0.1',
 
     # any module necessary for this one to work correctly
